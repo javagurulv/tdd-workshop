@@ -10,6 +10,7 @@ import static org.junit.Assert.assertThat;
 
 public class EnterpriseStringCalculatorTest {
 
+    private StringUtils stringUtils;
     private EnterpriseStringCalculator calculator;
 
     @Rule
@@ -18,7 +19,8 @@ public class EnterpriseStringCalculatorTest {
 
     @Before
     public void init() {
-        calculator = new EnterpriseStringCalculator();
+        stringUtils = new StringUtils();
+        calculator = new EnterpriseStringCalculator(stringUtils);
     }
 
     @Test

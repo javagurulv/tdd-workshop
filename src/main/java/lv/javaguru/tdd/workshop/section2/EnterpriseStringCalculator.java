@@ -11,10 +11,16 @@ import static java.util.stream.Collectors.toList;
 
 public class EnterpriseStringCalculator {
 
-    private static final String EMPTY_STRING = "";
     private static final String DELIMITERS_REGEXP = "[,\n]";
     private static final int ONE_THOUSAND = 1000;
     private static final int ZERO = 0;
+
+    private StringUtils stringUtils;
+
+
+    public EnterpriseStringCalculator(StringUtils stringUtils) {
+        this.stringUtils = stringUtils;
+    }
 
     enum Sign {
         POSITIVE,
@@ -52,13 +58,9 @@ public class EnterpriseStringCalculator {
     private List<Integer> splitNumbers(String numbers) {
         String[] separatedNumbers = numbers.split(DELIMITERS_REGEXP);
         return Arrays.asList(separatedNumbers).stream()
-                .filter(number -> !isEmptyString(number))
+                .filter(number -> !stringUtils.isEmptyString(number))
                 .map(Integer::parseInt)
                 .collect(toList());
-    }
-
-    private boolean isEmptyString(String str) {
-        return EMPTY_STRING.equals(str);
     }
 
     private boolean isNumberLessThan1000(int number) {
