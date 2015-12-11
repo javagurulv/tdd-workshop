@@ -14,6 +14,7 @@ public class StringCalculator {
 
     private static final String EMPTY_STRING = "";
     private static final String DELIMITERS_REGEXP = "[,\n]";
+    private static final int ONE_THOUSAND = 1000;
 
     enum Sign {
         POSITIVE,
@@ -27,14 +28,15 @@ public class StringCalculator {
 
     public int add(String lineWithNumbers) {
         Map<Sign, List<Integer>> signedNumbers = splitNumbers(lineWithNumbers).stream()
+                .filter(this::isNumberLessThan1000)
                 .collect(groupingBy(Sign::getSign));
 
         if (signedNumbers.containsKey(Sign.NEGATIVE)) {
             List<Integer> negativeNumbers = signedNumbers.get(Sign.NEGATIVE);
             String errorMessage = "negatives not allowed: "
                     + negativeNumbers.stream()
-                        .map(Object::toString)
-                        .collect(Collectors.joining(", "));
+                    .map(Object::toString)
+                    .collect(Collectors.joining(", "));
             throw new IllegalArgumentException(errorMessage);
         }
 
@@ -57,6 +59,10 @@ public class StringCalculator {
 
     private boolean isEmptyString(String str) {
         return EMPTY_STRING.equals(str);
+    }
+
+    private boolean isNumberLessThan1000(int number) {
+        return number <= ONE_THOUSAND;
     }
 
 }
