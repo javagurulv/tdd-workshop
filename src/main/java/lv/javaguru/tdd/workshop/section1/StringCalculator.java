@@ -3,13 +3,14 @@ package lv.javaguru.tdd.workshop.section1;
 public class StringCalculator {
 
     private static final String EMPTY_STRING = "";
+    private static final String COMMA_DELIMITER = ",";
 
     public int add(String numbers) {
 
         if (isEmptyString(numbers)) {
             return 0;
         } else {
-            String[] separatedNumbers = numbers.split(",");
+            String[] separatedNumbers = numbers.split(COMMA_DELIMITER);
             int sum = 0;
             for (String number : separatedNumbers) {
                 sum += Integer.parseInt(number);
