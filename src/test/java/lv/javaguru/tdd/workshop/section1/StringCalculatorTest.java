@@ -14,4 +14,11 @@ public class StringCalculatorTest {
         assertThat(result, is(0));
     }
 
+    @Test
+    public void whenNumbersStringContainsOneNumberThenResultMustBeThatNumber() {
+        StringCalculator calculator = new StringCalculator();
+        int result = calculator.add("1");
+        assertThat(result, is(1));
+    }
+
 }
