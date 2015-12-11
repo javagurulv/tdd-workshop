@@ -1,0 +1,9 @@
+String Calculator - Enterprise Solution :)
+
+Refactor StringCalculator class
+1. Introduce StringUtils class and move isEmptyString() to it
+2. Introduce NumberUtils class and move isNumberLessThan1000() to it
+3. Introduce SplitNumbersLine class and move splitNumbers() to it
+
+
+
