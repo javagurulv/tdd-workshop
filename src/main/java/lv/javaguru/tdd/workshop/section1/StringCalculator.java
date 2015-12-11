@@ -6,8 +6,7 @@ import java.util.List;
 public class StringCalculator {
 
     private static final String EMPTY_STRING = "";
-    private static final String COMMA_DELIMITER = ",";
-    private static final String NEW_LINE_DELIMITER = "\n";
+    private static final String DELIMITERS_REGEXP = "[,\n]";
 
     public int add(String numbers) {
         return getSeparatedNumbers(numbers).stream()
@@ -17,7 +16,7 @@ public class StringCalculator {
     }
 
     private List<String> getSeparatedNumbers(String numbers) {
-        String[] separatedNumbers = numbers.split(COMMA_DELIMITER + "|" + NEW_LINE_DELIMITER);
+        String[] separatedNumbers = numbers.split(DELIMITERS_REGEXP);
         return Arrays.asList(separatedNumbers);
     }
 
