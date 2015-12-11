@@ -9,7 +9,12 @@ public class StringCalculator {
         if (isEmptyString(numbers)) {
             return 0;
         } else {
-            return Integer.parseInt(numbers);
+            String[] separatedNumbers = numbers.split(",");
+            int sum = 0;
+            for (String number : separatedNumbers) {
+                sum += Integer.parseInt(number);
+            }
+            return sum;
         }
 
     }
