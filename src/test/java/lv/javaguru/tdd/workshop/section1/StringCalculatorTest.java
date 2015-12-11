@@ -71,4 +71,10 @@ public class StringCalculatorTest {
         calculator.add("-1,-2");
     }
 
+    @Test
+    public void whenNumberIsBiggerThen1000ThenJustIgnoreIt() {
+        int result = calculator.add("1001");
+        assertThat(result, is(0));
+    }
+
 }
