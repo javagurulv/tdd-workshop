@@ -40,4 +40,10 @@ public class StringCalculatorTest {
         assertThat(result, is(6));
     }
 
+    @Test
+    public void whenNumbersSeparatedByNewLineSymbolThenResultMustBeSumOfThisNumbers() {
+        int result = calculator.add("1\n2\n3");
+        assertThat(result, is(6));
+    }
+
 }
