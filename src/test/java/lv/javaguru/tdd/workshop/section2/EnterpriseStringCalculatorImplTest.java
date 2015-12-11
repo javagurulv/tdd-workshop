@@ -8,11 +8,8 @@ import org.junit.rules.ExpectedException;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 
-public class EnterpriseStringCalculatorTest {
+public class EnterpriseStringCalculatorImplTest {
 
-    private StringUtils stringUtils;
-    private NumberUtils numberUtils;
-    private SplitNumbersLine splitNumbersLine;
     private EnterpriseStringCalculator calculator;
 
     @Rule
@@ -21,10 +18,7 @@ public class EnterpriseStringCalculatorTest {
 
     @Before
     public void init() {
-        stringUtils = new StringUtils();
-        numberUtils = new NumberUtils();
-        splitNumbersLine = new SplitNumbersLine(stringUtils);
-        calculator = new EnterpriseStringCalculator(numberUtils, splitNumbersLine);
+        calculator = EnterpriseStringCalculatorFactory.create();
     }
 
     @Test
