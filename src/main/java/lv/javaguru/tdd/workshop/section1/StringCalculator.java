@@ -10,15 +10,10 @@ public class StringCalculator {
     private static final String NEW_LINE_DELIMITER = "\n";
 
     public int add(String numbers) {
-
-        if (isEmptyString(numbers)) {
-            return 0;
-        } else {
-            return getSeparatedNumbers(numbers).stream()
-                    .mapToInt(Integer::parseInt)
-                    .sum();
-        }
-
+        return getSeparatedNumbers(numbers).stream()
+                .filter(number -> !isEmptyString(number))
+                .mapToInt(Integer::parseInt)
+                .sum();
     }
 
     private List<String> getSeparatedNumbers(String numbers) {
