@@ -1,27 +1,24 @@
 package lv.javaguru.tdd.workshop.section2;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.groupingBy;
-import static java.util.stream.Collectors.toList;
 
 public class EnterpriseStringCalculator {
 
-    private static final String DELIMITERS_REGEXP = "[,\n]";
     private static final int ZERO = 0;
 
-    private StringUtils stringUtils;
     private NumberUtils numberUtils;
+    private SplitNumbersLine splitNumbersLine;
 
 
-    public EnterpriseStringCalculator(StringUtils stringUtils,
-                                      NumberUtils numberUtils) {
-        this.stringUtils = stringUtils;
+    public EnterpriseStringCalculator(NumberUtils numberUtils,
+                                      SplitNumbersLine splitNumbersLine) {
         this.numberUtils = numberUtils;
+        this.splitNumbersLine = splitNumbersLine;
     }
 
     enum Sign {
@@ -35,7 +32,7 @@ public class EnterpriseStringCalculator {
     }
 
     public int add(String lineWithNumbers) {
-        Map<Sign, List<Integer>> signedNumbers = splitNumbers(lineWithNumbers).stream()
+        Map<Sign, List<Integer>> signedNumbers = splitNumbersLine.splitNumbers(lineWithNumbers).stream()
                 .filter(numberUtils::isNumberLessThan1000)
                 .collect(groupingBy(Sign::getSign));
 
@@ -55,14 +52,6 @@ public class EnterpriseStringCalculator {
         } else {
             return ZERO;
         }
-    }
-
-    private List<Integer> splitNumbers(String numbers) {
-        String[] separatedNumbers = numbers.split(DELIMITERS_REGEXP);
-        return Arrays.asList(separatedNumbers).stream()
-                .filter(number -> !stringUtils.isEmptyString(number))
-                .map(Integer::parseInt)
-                .collect(toList());
     }
 
 }

@@ -12,6 +12,7 @@ public class EnterpriseStringCalculatorTest {
 
     private StringUtils stringUtils;
     private NumberUtils numberUtils;
+    private SplitNumbersLine splitNumbersLine;
     private EnterpriseStringCalculator calculator;
 
     @Rule
@@ -22,7 +23,8 @@ public class EnterpriseStringCalculatorTest {
     public void init() {
         stringUtils = new StringUtils();
         numberUtils = new NumberUtils();
-        calculator = new EnterpriseStringCalculator(stringUtils, numberUtils);
+        splitNumbersLine = new SplitNumbersLine(stringUtils);
+        calculator = new EnterpriseStringCalculator(numberUtils, splitNumbersLine);
     }
 
     @Test
