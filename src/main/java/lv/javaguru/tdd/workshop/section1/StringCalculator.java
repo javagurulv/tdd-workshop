@@ -2,8 +2,11 @@ package lv.javaguru.tdd.workshop.section1;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
+import static java.util.stream.Collectors.groupingBy;
 import static java.util.stream.Collectors.toList;
 
 
@@ -12,41 +15,48 @@ public class StringCalculator {
     private static final String EMPTY_STRING = "";
     private static final String DELIMITERS_REGEXP = "[,\n]";
 
-    public int add(String numbers) {
-        List<String> splitedNumbers = splitNumbers(numbers);
+    enum Sign {
+        POSITIVE,
+        NEGATIVE;
 
-        List<Integer> negativeNumbers = splitedNumbers.stream()
-                .filter(number -> !isEmptyString(number))
-                .map(Integer::parseInt)
-                .filter(this::isNegativeNumber)
-                .collect(toList());
+        static Sign getSign(int number) {
+            return number < 0 ? NEGATIVE : POSITIVE;
+        }
 
-        if (!negativeNumbers.isEmpty()) {
+    }
+
+    public int add(String lineWithNumbers) {
+        Map<Sign, List<Integer>> signedNumbers = splitNumbers(lineWithNumbers).stream()
+                .collect(groupingBy(Sign::getSign));
+
+        if (signedNumbers.containsKey(Sign.NEGATIVE)) {
+            List<Integer> negativeNumbers = signedNumbers.get(Sign.NEGATIVE);
             String errorMessage = "negatives not allowed: "
                     + negativeNumbers.stream()
-                    .map(Object::toString)
-                    .collect(Collectors.joining(", "));
+                        .map(Object::toString)
+                        .collect(Collectors.joining(", "));
             throw new IllegalArgumentException(errorMessage);
         }
 
-        return splitedNumbers.stream()
-                .filter(number -> !isEmptyString(number))
-                .mapToInt(Integer::parseInt)
-                .filter(number -> !isNegativeNumber(number))
-                .sum();
+        if (signedNumbers.containsKey(Sign.POSITIVE)) {
+            return signedNumbers.get(Sign.POSITIVE).stream()
+                    .map(Function.identity())
+                    .reduce(0, (a, b) -> a + b);
+        } else {
+            return 0;
+        }
     }
 
-    private List<String> splitNumbers(String numbers) {
+    private List<Integer> splitNumbers(String numbers) {
         String[] separatedNumbers = numbers.split(DELIMITERS_REGEXP);
-        return Arrays.asList(separatedNumbers);
+        return Arrays.asList(separatedNumbers).stream()
+                .filter(number -> !isEmptyString(number))
+                .map(Integer::parseInt)
+                .collect(toList());
     }
 
     private boolean isEmptyString(String str) {
         return EMPTY_STRING.equals(str);
-    }
-
-    private boolean isNegativeNumber(int number) {
-        return number < 0;
     }
 
 }
