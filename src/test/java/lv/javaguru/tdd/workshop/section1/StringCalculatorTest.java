@@ -28,4 +28,10 @@ public class StringCalculatorTest {
         assertThat(result, is(1));
     }
 
+    @Test
+    public void whenNumbersStringContainsTwoNumbersSeparatedByCommaThenResultMustBeSumOfThisNumbers() {
+        int result = calculator.add("1,2");
+        assertThat(result, is(3));
+    }
+
 }
