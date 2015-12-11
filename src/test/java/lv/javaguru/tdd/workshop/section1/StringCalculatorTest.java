@@ -1,7 +1,9 @@
 package lv.javaguru.tdd.workshop.section1;
 
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
@@ -9,6 +11,9 @@ import static org.junit.Assert.assertThat;
 public class StringCalculatorTest {
 
     private StringCalculator calculator;
+
+    @Rule
+    public ExpectedException exception = ExpectedException.none();
 
 
     @Before
@@ -50,6 +55,13 @@ public class StringCalculatorTest {
     public void whenNumbersSeparatedByNewLineAndCommaSymbolsThenResultMustBeSumOfThisNumbers() {
         int result = calculator.add("1\n2,3");
         assertThat(result, is(6));
+    }
+
+    @Test
+    public void whenNumberIsNegativeThenThrowException() {
+        exception.expect(IllegalArgumentException.class);
+        exception.expectMessage("negatives not allowed: -1");
+        calculator.add("-1");
     }
 
 }
