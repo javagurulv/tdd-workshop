@@ -8,9 +8,10 @@ public class StringCalculator {
 
         if (isEmptyString(numbers)) {
             return 0;
+        } else {
+            return Integer.parseInt(numbers);
         }
 
-        throw new IllegalArgumentException();
     }
 
     private boolean isEmptyString(String str) {
