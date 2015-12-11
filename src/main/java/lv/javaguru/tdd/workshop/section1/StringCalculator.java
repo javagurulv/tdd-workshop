@@ -15,6 +15,7 @@ public class StringCalculator {
     private static final String EMPTY_STRING = "";
     private static final String DELIMITERS_REGEXP = "[,\n]";
     private static final int ONE_THOUSAND = 1000;
+    private static final int ZERO = 0;
 
     enum Sign {
         POSITIVE,
@@ -43,9 +44,9 @@ public class StringCalculator {
         if (signedNumbers.containsKey(Sign.POSITIVE)) {
             return signedNumbers.get(Sign.POSITIVE).stream()
                     .map(Function.identity())
-                    .reduce(0, (a, b) -> a + b);
+                    .reduce(ZERO, (a, b) -> a + b);
         } else {
-            return 0;
+            return ZERO;
         }
     }
 
