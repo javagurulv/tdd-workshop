@@ -1,6 +1,6 @@
 package lv.javaguru.tdd.workshop.section2;
 
-public class StringUtils {
+class StringUtils {
 
     private static final String EMPTY_STRING = "";
 

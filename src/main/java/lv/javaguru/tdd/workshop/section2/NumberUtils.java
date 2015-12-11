@@ -1,6 +1,6 @@
 package lv.javaguru.tdd.workshop.section2;
 
-public class NumberUtils {
+class NumberUtils {
 
     private static final int ONE_THOUSAND = 1000;
 

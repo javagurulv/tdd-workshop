@@ -21,16 +21,6 @@ public class EnterpriseStringCalculator {
         this.splitNumbersLine = splitNumbersLine;
     }
 
-    enum Sign {
-        POSITIVE,
-        NEGATIVE;
-
-        static Sign getSign(int number) {
-            return number < 0 ? NEGATIVE : POSITIVE;
-        }
-
-    }
-
     public int add(String lineWithNumbers) {
         Map<Sign, List<Integer>> signedNumbers = splitNumbersLine.splitNumbers(lineWithNumbers).stream()
                 .filter(numberUtils::isNumberLessThan1000)

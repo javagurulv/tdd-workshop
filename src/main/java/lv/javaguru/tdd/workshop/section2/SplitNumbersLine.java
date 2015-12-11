@@ -5,7 +5,7 @@ import java.util.List;
 
 import static java.util.stream.Collectors.toList;
 
-public class SplitNumbersLine {
+class SplitNumbersLine {
 
     private static final String DELIMITERS_REGEXP = "[,\n]";
 
