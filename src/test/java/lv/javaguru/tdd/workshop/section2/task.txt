@@ -6,4 +6,9 @@ Refactor StringCalculator class
 3. Introduce SplitNumbersLine class and move splitNumbers() to it
 4. Move enum Sign to separate class
 
+---------------------------------------
 
+5. Create separate test for StringUtils
+6. Create separate test for NumberUtils
+7. Create separate test for SplitNumbersLine
+8. Create separate test for Sign
