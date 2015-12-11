@@ -64,4 +64,11 @@ public class StringCalculatorTest {
         calculator.add("-1");
     }
 
+    @Test
+    public void whenMultipleNumbersIsNegativeThenThrowExceptionAndShowNegativeNumbersInTheMessage() {
+        exception.expect(IllegalArgumentException.class);
+        exception.expectMessage("negatives not allowed: -1, -2");
+        calculator.add("-1,-2");
+    }
+
 }
