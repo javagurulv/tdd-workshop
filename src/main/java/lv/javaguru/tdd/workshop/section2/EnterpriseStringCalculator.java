@@ -12,14 +12,16 @@ import static java.util.stream.Collectors.toList;
 public class EnterpriseStringCalculator {
 
     private static final String DELIMITERS_REGEXP = "[,\n]";
-    private static final int ONE_THOUSAND = 1000;
     private static final int ZERO = 0;
 
     private StringUtils stringUtils;
+    private NumberUtils numberUtils;
 
 
-    public EnterpriseStringCalculator(StringUtils stringUtils) {
+    public EnterpriseStringCalculator(StringUtils stringUtils,
+                                      NumberUtils numberUtils) {
         this.stringUtils = stringUtils;
+        this.numberUtils = numberUtils;
     }
 
     enum Sign {
@@ -34,7 +36,7 @@ public class EnterpriseStringCalculator {
 
     public int add(String lineWithNumbers) {
         Map<Sign, List<Integer>> signedNumbers = splitNumbers(lineWithNumbers).stream()
-                .filter(this::isNumberLessThan1000)
+                .filter(numberUtils::isNumberLessThan1000)
                 .collect(groupingBy(Sign::getSign));
 
         if (signedNumbers.containsKey(Sign.NEGATIVE)) {
@@ -61,10 +63,6 @@ public class EnterpriseStringCalculator {
                 .filter(number -> !stringUtils.isEmptyString(number))
                 .map(Integer::parseInt)
                 .collect(toList());
-    }
-
-    private boolean isNumberLessThan1000(int number) {
-        return number <= ONE_THOUSAND;
     }
 
 }
