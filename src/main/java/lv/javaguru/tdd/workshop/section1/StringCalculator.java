@@ -1,5 +1,8 @@
 package lv.javaguru.tdd.workshop.section1;
 
+import java.util.Arrays;
+import java.util.List;
+
 public class StringCalculator {
 
     private static final String EMPTY_STRING = "";
@@ -11,14 +14,16 @@ public class StringCalculator {
         if (isEmptyString(numbers)) {
             return 0;
         } else {
-            String[] separatedNumbers = numbers.split(COMMA_DELIMITER + "|" + NEW_LINE_DELIMITER);
-            int sum = 0;
-            for (String number : separatedNumbers) {
-                sum += Integer.parseInt(number);
-            }
-            return sum;
+            return getSeparatedNumbers(numbers).stream()
+                    .mapToInt(Integer::parseInt)
+                    .sum();
         }
 
+    }
+
+    private List<String> getSeparatedNumbers(String numbers) {
+        String[] separatedNumbers = numbers.split(COMMA_DELIMITER + "|" + NEW_LINE_DELIMITER);
+        return Arrays.asList(separatedNumbers);
     }
 
     private boolean isEmptyString(String str) {
