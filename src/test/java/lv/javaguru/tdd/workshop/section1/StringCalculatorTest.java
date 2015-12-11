@@ -34,4 +34,10 @@ public class StringCalculatorTest {
         assertThat(result, is(3));
     }
 
+    @Test
+    public void whenNumbersStringContainsThreeNumbersSeparatedByCommaThenResultMustBeSumOfThisNumbers() {
+        int result = calculator.add("1,2,3");
+        assertThat(result, is(6));
+    }
+
 }
